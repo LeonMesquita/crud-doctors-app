@@ -4,9 +4,10 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   ManyToOne,
+  JoinTable,
 } from 'typeorm';
 
-@Entity()
+@Entity('doctors')
 export class DoctorModel {
   @PrimaryGeneratedColumn()
   id: number;
@@ -26,17 +27,15 @@ export class DoctorModel {
   @Column('int')
   cep: number;
 
-  @Column('array')
-  medical_specialties: string[];
-
   @OneToMany(
     () => SpecialtiesDoctors,
     (specialties_doctors: SpecialtiesDoctors) => specialties_doctors.specialty,
   )
+  @JoinTable()
   public specialties_doctors: SpecialtiesDoctors[];
 }
 
-@Entity()
+@Entity('specialties')
 export class SpecialtyModel {
   @PrimaryGeneratedColumn()
   id: number;
@@ -48,10 +47,11 @@ export class SpecialtyModel {
     () => SpecialtiesDoctors,
     (specialties_doctors: SpecialtiesDoctors) => specialties_doctors.specialty,
   )
+  @JoinTable()
   public specialties_doctors: SpecialtiesDoctors[];
 }
 
-@Entity()
+@Entity('specialties_doctors')
 export class SpecialtiesDoctors {
   @PrimaryGeneratedColumn()
   id: number;
@@ -65,5 +65,6 @@ export class SpecialtiesDoctors {
     () => DoctorModel,
     (doctor: DoctorModel) => doctor.specialties_doctors,
   )
+  @JoinTable()
   public doctor: DoctorModel;
 }
