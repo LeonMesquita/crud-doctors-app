@@ -8,22 +8,16 @@ import { DoctorUtils } from 'src/utils/doctor.utils';
 export class DoctorService {
   constructor(
     private readonly doctorRepository: DoctorRepository,
+
     private readonly doctorUtils: DoctorUtils,
   ) {}
-  getHello(): string {
-    return 'Hello Doctor!';
-  }
+
   public async create(body: DoctorSchema): Promise<DoctorModel> {
-    this.doctorUtils.validateSpecialties(body.specialties);
     const createdDoctor = await this.doctorRepository.insert(body);
     return createdDoctor;
   }
 
   public async readOne(): Promise<string> {
-    return '';
-  }
-
-  public async readAll(): Promise<string> {
     return '';
   }
 

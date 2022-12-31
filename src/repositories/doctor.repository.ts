@@ -10,8 +10,12 @@ export class DoctorRepository {
     @InjectRepository(DoctorModel) private model: Repository<DoctorModel>,
   ) {}
   public async insert(body: DoctorSchema): Promise<DoctorModel> {
-    console.log(body);
     const createdDoctor = await this.model.save(body);
     return createdDoctor;
+  }
+
+  public async getAll(): Promise<DoctorModel[]> {
+    const doctors = await this.model.find();
+    return doctors;
   }
 }

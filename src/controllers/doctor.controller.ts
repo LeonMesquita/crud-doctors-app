@@ -18,11 +18,6 @@ export class DoctorController {
     return '';
   }
 
-  @Get('')
-  public async readAll(): Promise<string> {
-    return '';
-  }
-
   @Put(':id')
   public async update(): Promise<string> {
     return '';

@@ -1,4 +1,11 @@
-import { IsString, MaxLength, IsArray, IsNumberString } from 'class-validator';
+import {
+  IsString,
+  MaxLength,
+  IsArray,
+  IsNumberString,
+  IsInt,
+  ArrayMinSize,
+} from 'class-validator';
 
 export class DoctorSchema {
   @IsString()
@@ -23,5 +30,13 @@ export class DoctorSchema {
   cep: string;
 
   @IsArray()
-  specialties: Array<number>;
+  @ArrayMinSize(2)
+  // @ValidateNested({ each: true })
+  // @Type(() => SpecialtyModel)
+  specialties: Specialty[];
+}
+
+class Specialty {
+  @IsInt()
+  id: number;
 }
