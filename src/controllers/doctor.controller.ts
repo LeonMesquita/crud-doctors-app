@@ -45,7 +45,8 @@ export class DoctorController {
   }
 
   @Delete(':id')
-  public async delete(): Promise<string> {
+  public async delete(@Param('id', ParseIntPipe) id: number): Promise<string> {
+    await this.doctorService.delete(id);
     return '';
   }
 }

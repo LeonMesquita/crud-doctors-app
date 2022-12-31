@@ -29,4 +29,10 @@ export class DoctorRepository {
     Object.assign(instance, body);
     return await this.model.save(instance);
   }
+
+  public async softDelete(id: number): Promise<string> {
+    await this.model.delete(id);
+
+    return '';
+  }
 }

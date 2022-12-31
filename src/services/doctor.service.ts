@@ -30,7 +30,11 @@ export class DoctorService {
     return await this.doctorRepository.update(id, body);
   }
 
-  public async delete(): Promise<string> {
+  public async delete(id: number): Promise<string> {
+    const doctor = await this.doctorRepository.findOne(id);
+    if (!doctor)
+      throw new NotFoundException(`The doctor with id ${id} was not found`);
+    await this.doctorRepository.softDelete(id);
     return '';
   }
 }
