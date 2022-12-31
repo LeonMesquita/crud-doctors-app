@@ -6,11 +6,14 @@ import {
   SpecialtyModel,
   SpecialtiesDoctors,
 } from 'src/models/doctor.model';
+import { DoctorRepository } from 'src/repositories/doctor.repository';
+import { DoctorService } from 'src/services/doctor.service';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([DoctorModel, SpecialtyModel, SpecialtiesDoctors]),
   ],
   controllers: [DoctorController],
+  providers: [DoctorService, DoctorRepository],
 })
 export class DoctorModule {}

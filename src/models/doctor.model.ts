@@ -15,17 +15,17 @@ export class DoctorModel {
   @Column({ length: 120 })
   name: string;
 
-  @Column('int', { unique: true })
-  crm: number;
+  @Column({ unique: true, length: 7 })
+  crm: string;
 
-  @Column('int', { unique: true })
-  landline_number: number;
+  @Column({ unique: true })
+  landline_number: string;
 
-  @Column('int', { unique: true })
-  mobile_number: number;
+  @Column({ unique: true })
+  mobile_number: string;
 
-  @Column('int')
-  cep: number;
+  @Column()
+  cep: string;
 
   @OneToMany(
     () => SpecialtiesDoctors,
