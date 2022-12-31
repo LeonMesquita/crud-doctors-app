@@ -21,6 +21,10 @@ export class DoctorService {
     return '';
   }
 
+  public async readAll(): Promise<DoctorModel[]> {
+    return await this.doctorRepository.getAll();
+  }
+
   public async update(): Promise<string> {
     return '';
   }
