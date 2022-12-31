@@ -18,6 +18,11 @@ export class DoctorController {
     return '';
   }
 
+  @Get()
+  public async readAll(): Promise<DoctorModel[]> {
+    return await this.doctorService.readAll();
+  }
+
   @Put(':id')
   public async update(): Promise<string> {
     return '';
