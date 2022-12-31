@@ -20,7 +20,13 @@ export class DoctorRepository {
   }
 
   public async findOne(id: number): Promise<DoctorModel> {
-    const doctor = await this.model.findOne({ where: { id } });
+    const doctor = await this.model.findOneBy({ id });
     return doctor;
+  }
+
+  public async update(id: number, body: DoctorSchema): Promise<DoctorSchema> {
+    const instance = await this.model.findOneBy({ id });
+    Object.assign(instance, body);
+    return await this.model.save(instance);
   }
 }

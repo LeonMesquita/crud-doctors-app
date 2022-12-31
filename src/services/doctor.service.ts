@@ -23,8 +23,11 @@ export class DoctorService {
     return await this.doctorRepository.findAll();
   }
 
-  public async update(): Promise<string> {
-    return '';
+  public async update(id: number, body: DoctorSchema): Promise<DoctorSchema> {
+    const doctor = await this.doctorRepository.findOne(id);
+    if (!doctor)
+      throw new NotFoundException(`The doctor with id ${id} was not found`);
+    return await this.doctorRepository.update(id, body);
   }
 
   public async delete(): Promise<string> {
