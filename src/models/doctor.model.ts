@@ -4,6 +4,9 @@ import {
   PrimaryGeneratedColumn,
   JoinTable,
   ManyToMany,
+  DeleteDateColumn,
+  UpdateDateColumn,
+  CreateDateColumn,
 } from 'typeorm';
 
 @Entity('doctors')
@@ -25,6 +28,16 @@ export class DoctorModel {
 
   @Column()
   cep: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
+
   @ManyToMany(() => SpecialtyModel, {
     eager: true,
     cascade: true,
@@ -42,6 +55,16 @@ export class SpecialtyModel {
 
   @Column({ length: 120, unique: true })
   name: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
+
   @ManyToMany(() => DoctorModel)
   @JoinTable()
   doctors: DoctorModel[];

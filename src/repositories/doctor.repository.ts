@@ -31,7 +31,7 @@ export class DoctorRepository {
   }
 
   public async softDelete(id: number): Promise<string> {
-    await this.model.delete(id);
+    await this.model.softDelete(id);
 
     return '';
   }
