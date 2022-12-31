@@ -25,7 +25,12 @@ export class DoctorModel {
 
   @Column()
   cep: string;
-  @ManyToMany(() => SpecialtyModel, { eager: true })
+  @ManyToMany(() => SpecialtyModel, {
+    eager: true,
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinTable()
   specialties: SpecialtyModel[];
 }

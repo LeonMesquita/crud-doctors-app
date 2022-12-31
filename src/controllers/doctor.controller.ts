@@ -36,8 +36,12 @@ export class DoctorController {
   }
 
   @Put(':id')
-  public async update(): Promise<string> {
-    return '';
+  public async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: DoctorSchema,
+  ): Promise<DoctorSchema> {
+    const updatedDoctor = await this.doctorService.update(id, body);
+    return updatedDoctor;
   }
 
   @Delete(':id')
