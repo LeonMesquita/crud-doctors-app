@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { DoctorModel } from 'src/models/doctor.model';
 import { DoctorSchema } from 'src/schemas/doctor.schema';
 import { DoctorService } from '../services/doctor.service';
@@ -14,8 +23,11 @@ export class DoctorController {
   }
 
   @Get(':id')
-  public async readOne(): Promise<string> {
-    return '';
+  public async readOne(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<DoctorModel> {
+    const doctor = await this.doctorService.readOne(id);
+    return doctor;
   }
 
   @Get()
