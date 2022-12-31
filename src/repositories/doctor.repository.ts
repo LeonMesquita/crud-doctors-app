@@ -14,8 +14,13 @@ export class DoctorRepository {
     return createdDoctor;
   }
 
-  public async getAll(): Promise<DoctorModel[]> {
+  public async findAll(): Promise<DoctorModel[]> {
     const doctors = await this.model.find();
     return doctors;
+  }
+
+  public async findOne(id: number): Promise<DoctorModel> {
+    const doctor = await this.model.findOne({ where: { id } });
+    return doctor;
   }
 }

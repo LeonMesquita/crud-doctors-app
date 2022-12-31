@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { DoctorModel } from 'src/models/doctor.model';
 import { DoctorSchema } from 'src/schemas/doctor.schema';
 import { DoctorRepository } from 'src/repositories/doctor.repository';
@@ -12,12 +12,15 @@ export class DoctorService {
     return createdDoctor;
   }
 
-  public async readOne(): Promise<string> {
-    return '';
+  public async readOne(id: number): Promise<DoctorModel> {
+    const doctor = await this.doctorRepository.findOne(id);
+    if (!doctor)
+      throw new NotFoundException(`The doctor with id ${id} was not found`);
+    return doctor;
   }
 
   public async readAll(): Promise<DoctorModel[]> {
-    return await this.doctorRepository.getAll();
+    return await this.doctorRepository.findAll();
   }
 
   public async update(): Promise<string> {
