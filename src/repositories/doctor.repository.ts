@@ -56,7 +56,12 @@ export class DoctorRepository {
         'a.street as street',
       ])
       .where('doctors."addressId" = a.id')
-      .andWhere('a.street = :data', { data })
+      .andWhere(
+        'a.street = :data or a.cep = :data or a.district = :data or a.city = :data or a.state = :data or a.complement = :data',
+        {
+          data,
+        },
+      )
       .innerJoinAndSelect(AddressModel, 'a')
       .getMany();
 
