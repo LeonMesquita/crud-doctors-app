@@ -35,6 +35,9 @@ export class SpecialtySeeder implements Seeder {
         name: 'Cirurgia de tórax',
       },
     ];
+    await specialtyRepository.query(
+      `TRUNCATE TABLE specialties RESTART IDENTITY CASCADE;`,
+    );
 
     const newSpecialties = specialtyRepository.create(specialties);
     await specialtyRepository.save(newSpecialties);
