@@ -1,0 +1,26 @@
+services:
+  crud_doctors_db:
+    image: postgres
+    container_name: crud_doctors_db
+    restart: always
+    ports:
+      - 3254:5432
+    volumes:
+      - crud_doctors_db:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+
+  crud_doctors_app:
+    container_name: crud_doctors_app
+    build: .
+    ports:
+      - 5000:5000
+    depends_on:
+      - crud_doctors_db
+    env_file:
+      - .env
+
+
+volumes:
+  crud_doctors_db:

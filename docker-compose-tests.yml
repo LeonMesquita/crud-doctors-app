@@ -1,0 +1,20 @@
+services:
+  crud_doctors_db_test:
+    image: postgres
+    container_name: crud_doctors_db_test
+    restart: always
+    ports:
+      - 2345:5432
+    env_file:
+      - .env
+
+
+  crud_doctors_app:
+    container_name: crud_doctors_app
+    build: .
+    ports:
+      - 5000:5000
+    depends_on:
+      - crud_doctors_db_test
+    env_file:
+      - .env
