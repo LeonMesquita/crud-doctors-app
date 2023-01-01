@@ -1,6 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 import axios from 'axios';
-import { AddressSchema } from './schemas/address.schema';
+import { AddressSchema } from '../schemas/address.schema';
 export async function searchCEP(cep: string): Promise<AddressSchema> {
   const url = `https://viacep.com.br/ws/${cep}/json/`;
   try {
