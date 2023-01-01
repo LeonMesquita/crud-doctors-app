@@ -27,6 +27,12 @@ export class DoctorService {
     return doctor;
   }
 
+  public async readOneByParam(data: any): Promise<DoctorModel> {
+    const doctor = await this.doctorRepository.findOneByParam(data);
+    if (!doctor) throw new NotFoundException(`The doctor was not found`);
+    return doctor;
+  }
+
   public async readAll(): Promise<DoctorModel[]> {
     return await this.doctorRepository.findAll();
   }

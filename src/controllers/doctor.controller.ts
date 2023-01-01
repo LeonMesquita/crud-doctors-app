@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { DoctorModel } from 'src/models/doctor.model';
 import { DoctorBodySchema, DoctorSchema } from 'src/schemas/doctor.schema';
@@ -22,11 +23,18 @@ export class DoctorController {
     return createdDoctor;
   }
 
-  @Get(':id')
-  public async readOne(
-    @Param('id', ParseIntPipe) id: number,
-  ): Promise<DoctorModel> {
-    const doctor = await this.doctorService.readOne(id);
+  // @Get(':id')
+  // public async readOne(
+  //   @Param('id', ParseIntPipe) id: number,
+  // ): Promise<DoctorModel> {
+  //   const doctor = await this.doctorService.readOne(id);
+  //   return doctor;
+  // }
+
+  @Get(':data')
+  public async readOne(@Param('data') data: any): Promise<DoctorModel> {
+    console.log(data);
+    const doctor = await this.doctorService.readOneByParam(data);
     return doctor;
   }
 

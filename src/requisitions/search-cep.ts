@@ -7,7 +7,7 @@ export async function searchCEP(cep: string): Promise<AddressSchema> {
     const res = await axios.get(url);
     const apiResponse: AddressInterface = res.data;
     const address: AddressSchema = {
-      cep: apiResponse.cep,
+      cep: apiResponse.cep.replace('-', ''),
       street: apiResponse.logradouro,
       district: apiResponse.bairro,
       complement: apiResponse.complemento,
