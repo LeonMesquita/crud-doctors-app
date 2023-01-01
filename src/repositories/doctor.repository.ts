@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DoctorModel } from 'src/models/doctor.model';
-import { DoctorSchema } from 'src/schemas/doctor.schema';
+import { DoctorBodySchema, DoctorSchema } from 'src/schemas/doctor.schema';
 import { Repository } from 'typeorm';
 
 @Injectable()

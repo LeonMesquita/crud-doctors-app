@@ -7,7 +7,9 @@ import {
   DeleteDateColumn,
   UpdateDateColumn,
   CreateDateColumn,
+  ManyToOne,
 } from 'typeorm';
+import { AddressModel } from './address.model';
 
 @Entity('doctors')
 export class DoctorModel {
@@ -26,9 +28,6 @@ export class DoctorModel {
   @Column({ unique: true })
   mobile_number: string;
 
-  @Column()
-  cep: string;
-
   @CreateDateColumn()
   createdAt: Date;
 
@@ -46,6 +45,9 @@ export class DoctorModel {
   })
   @JoinTable()
   specialties: SpecialtyModel[];
+
+  @ManyToOne(() => AddressModel, { eager: true, cascade: true })
+  address: AddressModel;
 }
 
 @Entity('specialties')
