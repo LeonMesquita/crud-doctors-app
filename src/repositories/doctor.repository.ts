@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import dataSource from 'db/data-source';
+import { AddressModel } from 'src/models/address.model';
 import { DoctorModel } from 'src/models/doctor.model';
 import { DoctorBodySchema, DoctorSchema } from 'src/schemas/doctor.schema';
 import { Like, Repository } from 'typeorm';
@@ -40,6 +42,25 @@ export class DoctorRepository {
         ],
       });
     return doctor;
+  }
+
+  public async findManyByAddress(data: any): Promise<object[]> {
+    const doctors = await this.model
+      .createQueryBuilder('doctors')
+      .select([
+        'doctors.id',
+        'doctors.name',
+        'doctors.crm',
+        'doctors.landline_number',
+        'doctors.mobile_number',
+        'a.street as street',
+      ])
+      .where('doctors."addressId" = a.id')
+      .andWhere('a.street = :data', { data })
+      .innerJoinAndSelect(AddressModel, 'a')
+      .getMany();
+
+    return doctors;
   }
 
   public async update(id: number, body: DoctorSchema): Promise<DoctorSchema> {

@@ -38,6 +38,12 @@ export class DoctorController {
     return doctor;
   }
 
+  @Get('/address/:data')
+  public async readMany(@Param('data') data: any): Promise<object[]> {
+    const doctor = await this.doctorService.readManyByAddress(data);
+    return doctor;
+  }
+
   @Get()
   public async readAll(): Promise<DoctorModel[]> {
     return await this.doctorService.readAll();

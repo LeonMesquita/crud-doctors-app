@@ -37,6 +37,11 @@ export class DoctorService {
     return await this.doctorRepository.findAll();
   }
 
+  public async readManyByAddress(data: any): Promise<object[]> {
+    const doctor = await this.doctorRepository.findManyByAddress(data);
+    return doctor;
+  }
+
   public async update(
     id: number,
     body: DoctorBodySchema,
