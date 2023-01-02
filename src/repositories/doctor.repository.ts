@@ -33,16 +33,16 @@ export class DoctorRepository {
     let doctor: DoctorModel;
     if (Number(data)) {
       doctor = await this.model.findOne({
-        where: { id: Number(data) },
-      });
-    } else
-      doctor = await this.model.findOne({
         where: [
-          { name: data },
+          { id: Number(data) },
           { crm: data },
           { landline_number: data },
           { mobile_number: data },
         ],
+      });
+    } else
+      doctor = await this.model.findOne({
+        where: [{ name: data }],
       });
     return doctor;
   }
