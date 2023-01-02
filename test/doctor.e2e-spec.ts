@@ -109,4 +109,14 @@ describe('DoctorController (e2e)', () => {
       })
       .expect(200);
   });
+
+  it('should update the doctor mobile number', async () => {
+    return request(app.getHttpServer())
+      .put('/doctor/1')
+      .send({
+        ...doctor,
+        mobile_number: '994563678',
+      })
+      .expect(200);
+  });
 });
