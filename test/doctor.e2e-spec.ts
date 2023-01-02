@@ -35,4 +35,7 @@ describe('DoctorController (e2e)', () => {
       })
       .expect(201);
   });
+  it('should create a new doctor', () => {
+    return request(app.getHttpServer()).get('/doctor').expect(200);
+  });
 });
