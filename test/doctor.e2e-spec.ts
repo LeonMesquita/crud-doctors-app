@@ -2,9 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
-import { clearDB } from '../db/reset-db';
-import dataSource from '../db/data-source';
-import { DoctorModel } from '../src/models/doctor.model';
 
 describe('DoctorController (e2e)', () => {
   let app: INestApplication;
