@@ -2,6 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
+import { clearDB } from '../db/reset-db';
+import dataSource from '../db/data-source';
+import { DoctorModel } from '../src/models/doctor.model';
 
 describe('DoctorController (e2e)', () => {
   let app: INestApplication;
@@ -15,10 +18,21 @@ describe('DoctorController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  afterAll(async () => {
+    await app.close();
+  });
+
+  it('should create a new doctor', async () => {
     return request(app.getHttpServer())
-      .get('/doctor')
-      .expect(200)
-      .expect('Hello Doctor!');
+      .post('/doctor')
+      .send({
+        name: 'lorem ipsum',
+        crm: '4536784',
+        landline_number: '4536345',
+        mobile_number: '43546324',
+        specialties: [1, 2],
+        cep: '64207065',
+      })
+      .expect(201);
   });
 });

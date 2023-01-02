@@ -1,10 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { DoctorModel } from 'src/models/doctor.model';
-import { DoctorBodySchema, DoctorSchema } from 'src/schemas/doctor.schema';
-import { DoctorRepository } from 'src/repositories/doctor.repository';
-import { searchCEP } from 'src/requisitions/search-cep';
-import { AddressRepository } from 'src/repositories/address.repository';
-import { AddressSchema } from 'src/schemas/address.schema';
+import { DoctorModel } from '../../src/models/doctor.model';
+import {
+  DoctorBodySchema,
+  DoctorSchema,
+} from '../../src/schemas/doctor.schema';
+import { DoctorRepository } from '../../src/repositories/doctor.repository';
+import { searchCEP } from '../../src/requisitions/search-cep';
+import { AddressRepository } from '../../src/repositories/address.repository';
+import { AddressSchema } from '../../src/schemas/address.schema';
 
 @Injectable()
 export class DoctorService {

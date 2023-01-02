@@ -13,10 +13,4 @@ describe('DoctorController', () => {
 
     doctorController = app.get<DoctorController>(DoctorController);
   });
-
-  describe('root', () => {
-    it('should return "Hello Doctor!"', () => {
-      expect(doctorController.getHello()).toBe('Hello Doctor!');
-    });
-  });
 });

@@ -1,4 +1,4 @@
-import { SpecialtyModel } from 'src/models/doctor.model';
+import { SpecialtyModel } from '../../src/models/doctor.model';
 import { DataSource } from 'typeorm';
 import { Seeder, SeederFactoryManager } from 'typeorm-extension';
 

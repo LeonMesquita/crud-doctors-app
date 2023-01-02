@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import dataSource from 'db/data-source';
-import { AddressModel } from 'src/models/address.model';
-import { DoctorModel } from 'src/models/doctor.model';
-import { DoctorBodySchema, DoctorSchema } from 'src/schemas/doctor.schema';
+import { AddressModel } from '../../src/models/address.model';
+import { DoctorModel } from '../../src/models/doctor.model';
+import {
+  DoctorBodySchema,
+  DoctorSchema,
+} from '../../src/schemas/doctor.schema';
 import { Like, Repository } from 'typeorm';
 
 @Injectable()

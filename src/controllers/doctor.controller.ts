@@ -9,8 +9,11 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { DoctorModel } from 'src/models/doctor.model';
-import { DoctorBodySchema, DoctorSchema } from 'src/schemas/doctor.schema';
+import { DoctorModel } from '../../src/models/doctor.model';
+import {
+  DoctorBodySchema,
+  DoctorSchema,
+} from '../../src/schemas/doctor.schema';
 import { DoctorService } from '../services/doctor.service';
 
 @Controller('/doctor')
