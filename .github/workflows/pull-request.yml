@@ -1,0 +1,18 @@
+name: Pull Request
+on: [pull_request]
+jobs:
+  PullRequest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+      - name: Make a new envfile
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_POSTGRES_USER: "postgres"
+          envkey_POSTGRES_PASSWORD: "postgres"
+          envkey_POSTGRES_DB: "crud_doctors"
+          envkey_DATABASE_URL: "postgresql://postgres:postgres@crud_doctors_db:5432/crud_doctors"
+          file_name: ".env"
+      - name: Run E2E tests
+        run: docker-compose run crud_doctors_app npm run test:e2e
