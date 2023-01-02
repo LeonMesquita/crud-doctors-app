@@ -42,4 +42,7 @@ describe('DoctorController (e2e)', () => {
   it('should get a doctor by id', async () => {
     return request(app.getHttpServer()).get('/doctor/1').expect(200);
   });
+  it('should get a doctor by crm', async () => {
+    return request(app.getHttpServer()).get('/doctor/4536784').expect(200);
+  });
 });
