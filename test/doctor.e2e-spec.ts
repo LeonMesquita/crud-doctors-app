@@ -129,4 +129,14 @@ describe('DoctorController (e2e)', () => {
       })
       .expect(200);
   });
+
+  it('should update the doctor specialties', async () => {
+    return request(app.getHttpServer())
+      .put('/doctor/1')
+      .send({
+        ...doctor,
+        specialties: [3, 6],
+      })
+      .expect(200);
+  });
 });
