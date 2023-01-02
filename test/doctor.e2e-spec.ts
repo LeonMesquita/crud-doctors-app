@@ -35,7 +35,11 @@ describe('DoctorController (e2e)', () => {
       })
       .expect(201);
   });
-  it('should create a new doctor', () => {
+  it('should get a list of all doctors', () => {
     return request(app.getHttpServer()).get('/doctor').expect(200);
+  });
+
+  it('should get a doctor by id', async () => {
+    return request(app.getHttpServer()).get('/doctor/1').expect(200);
   });
 });
