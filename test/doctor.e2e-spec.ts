@@ -48,4 +48,35 @@ describe('DoctorController (e2e)', () => {
   it('should get a doctor by landline number', async () => {
     return request(app.getHttpServer()).get('/doctor/4536345').expect(200);
   });
+  it('should get a doctor by mobile number', async () => {
+    return request(app.getHttpServer()).get('/doctor/43546324').expect(200);
+  });
+  it('should get a list of doctors by cep', async () => {
+    return request(app.getHttpServer())
+      .get('/doctor/address/64207065')
+      .expect(200);
+  });
+  it('should get a list of doctors by street', async () => {
+    return request(app.getHttpServer())
+      .get('/doctor/address/Rua dos Araújos')
+      .expect(200);
+  });
+  it('should get a list of doctors by complement', async () => {
+    return request(app.getHttpServer())
+      .get('/doctor/address/(M Universitária II)')
+      .expect(200);
+  });
+  it('should get a list of doctors by district', async () => {
+    return request(app.getHttpServer())
+      .get('/doctor/address/Frei Higino')
+      .expect(200);
+  });
+  it('should get a list of doctors by city', async () => {
+    return request(app.getHttpServer())
+      .get('/doctor/address/Parnaíba')
+      .expect(200);
+  });
+  it('should get a list of doctors by state', async () => {
+    return request(app.getHttpServer()).get('/doctor/address/PI').expect(200);
+  });
 });
