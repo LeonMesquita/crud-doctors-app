@@ -8,6 +8,14 @@ import { DoctorModel } from '../src/models/doctor.model';
 
 describe('DoctorController (e2e)', () => {
   let app: INestApplication;
+  const doctor = {
+    name: 'lorem ipsum',
+    crm: '4536784',
+    landline_number: '4536345',
+    mobile_number: '43546324',
+    specialties: [1, 2],
+    cep: '64207065',
+  };
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -25,14 +33,7 @@ describe('DoctorController (e2e)', () => {
   it('should create a new doctor', async () => {
     return request(app.getHttpServer())
       .post('/doctor')
-      .send({
-        name: 'lorem ipsum',
-        crm: '4536784',
-        landline_number: '4536345',
-        mobile_number: '43546324',
-        specialties: [1, 2],
-        cep: '64207065',
-      })
+      .send(doctor)
       .expect(201);
   });
   it('should get a list of all doctors', () => {
@@ -78,5 +79,14 @@ describe('DoctorController (e2e)', () => {
   });
   it('should get a list of doctors by state', async () => {
     return request(app.getHttpServer()).get('/doctor/address/PI').expect(200);
+  });
+  it('should update the doctor name', async () => {
+    return request(app.getHttpServer())
+      .put('/doctor/1')
+      .send({
+        ...doctor,
+        name: 'New Name',
+      })
+      .expect(200);
   });
 });

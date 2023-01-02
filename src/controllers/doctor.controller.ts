@@ -26,14 +26,6 @@ export class DoctorController {
     return createdDoctor;
   }
 
-  // @Get(':id')
-  // public async readOne(
-  //   @Param('id', ParseIntPipe) id: number,
-  // ): Promise<DoctorModel> {
-  //   const doctor = await this.doctorService.readOne(id);
-  //   return doctor;
-  // }
-
   @Get(':data')
   public async readOne(@Param('data') data: any): Promise<DoctorModel> {
     console.log(data);
