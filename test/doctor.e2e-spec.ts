@@ -119,4 +119,14 @@ describe('DoctorController (e2e)', () => {
       })
       .expect(200);
   });
+
+  it('should update the doctor address', async () => {
+    return request(app.getHttpServer())
+      .put('/doctor/1')
+      .send({
+        ...doctor,
+        cep: '20020050',
+      })
+      .expect(200);
+  });
 });
