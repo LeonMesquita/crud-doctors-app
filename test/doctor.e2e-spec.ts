@@ -56,4 +56,9 @@ describe('DoctorController (e2e)', () => {
       .get('/doctor/address/64207065')
       .expect(200);
   });
+  it('should get a list of doctors by street', async () => {
+    return request(app.getHttpServer())
+      .get('/doctor/address/Rua dos Araújos')
+      .expect(200);
+  });
 });
