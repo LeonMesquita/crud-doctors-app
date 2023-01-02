@@ -139,4 +139,8 @@ describe('DoctorController (e2e)', () => {
       })
       .expect(200);
   });
+
+  it('should delete a doctor', async () => {
+    return request(app.getHttpServer()).delete('/doctor/1').expect(200);
+  });
 });
