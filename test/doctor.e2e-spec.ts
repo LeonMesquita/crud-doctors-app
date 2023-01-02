@@ -30,6 +30,15 @@ describe('DoctorController (e2e)', () => {
     await app.close();
   });
 
+  // it('should throw 400 if the name has more than 120 characters', async () => {
+  //   return request(app.getHttpServer())
+  //     .post('/doctor')
+  //     .send({
+  //       ...doctor
+  //     })
+  //     .expect(400);
+  // });
+
   it('should create a new doctor', async () => {
     return request(app.getHttpServer())
       .post('/doctor')
