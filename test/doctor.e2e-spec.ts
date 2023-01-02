@@ -61,4 +61,9 @@ describe('DoctorController (e2e)', () => {
       .get('/doctor/address/Rua dos Araújos')
       .expect(200);
   });
+  it('should get a list of doctors by complement', async () => {
+    return request(app.getHttpServer()).get(
+      '/doctor/address/(M Universitária II',
+    );
+  });
 });
