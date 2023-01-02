@@ -48,4 +48,7 @@ describe('DoctorController (e2e)', () => {
   it('should get a doctor by landline number', async () => {
     return request(app.getHttpServer()).get('/doctor/4536345').expect(200);
   });
+  it('should get a doctor by landline number', async () => {
+    return request(app.getHttpServer()).get('/doctor/43546324').expect(200);
+  });
 });
