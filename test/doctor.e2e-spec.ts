@@ -71,4 +71,9 @@ describe('DoctorController (e2e)', () => {
       .get('/doctor/address/Frei Higino')
       .expect(200);
   });
+  it('should get a list of doctors by city', async () => {
+    return request(app.getHttpServer())
+      .get('/doctor/address/Parnaíba')
+      .expect(200);
+  });
 });
