@@ -62,8 +62,13 @@ describe('DoctorController (e2e)', () => {
       .expect(200);
   });
   it('should get a list of doctors by complement', async () => {
-    return request(app.getHttpServer()).get(
-      '/doctor/address/(M Universitária II',
-    );
+    return request(app.getHttpServer())
+      .get('/doctor/address/(M Universitária II)')
+      .expect(200);
+  });
+  it('should get a list of doctors by district', async () => {
+    return request(app.getHttpServer())
+      .get('/doctor/address/Frei Higino')
+      .expect(200);
   });
 });
