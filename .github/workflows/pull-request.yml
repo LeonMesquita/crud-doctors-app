@@ -9,10 +9,10 @@ jobs:
       - name: Make a new envfile
         uses: SpicyPizza/create-envfile@v1
         with:
-          envkey_DATABASE_URL: "postgresql://postgres:postgres@crud_doctors_db:5432/crud_doctors"
+          envkey_DATABASE_URL: "postgresql://postgres:postgres@crud_doctors_db_test:5432/crud_doctors_test"
           envkey_POSTGRES_USER: "postgres"
           envkey_POSTGRES_PASSWORD: "postgres"
-          envkey_POSTGRES_DB: "crud_doctors"
-          file_name: ".env.docker"
+          envkey_POSTGRES_DB: "crud_doctors_test"
+          file_name: ".env.test"
       - name: Run E2E tests
-        run: docker-compose run crud_doctors_app npm run test:e2e
+        run: docker-compose -f docker-compose-tests.yml run crud_doctors_app npm run test:e2e

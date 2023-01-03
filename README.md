@@ -13,7 +13,19 @@
 
 ## Descrição
 
+
 API desenvolvida em [Nest](https://github.com/nestjs/nest) para criação, leitura, edição e remoção de registros de médicos.
+
+## Documentação Swagger
+```bash
+# Via deploy AWS
+http://ec2-3-94-55-198.compute-1.amazonaws.com/docs
+
+# Via localhost
+http://localhost:${PORT}/docs
+```
+
+
 
 ## Rodando a aplicação no Docker
 ```bash
