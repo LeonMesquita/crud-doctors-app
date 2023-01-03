@@ -24,26 +24,20 @@ export class DoctorRepository {
     return doctors;
   }
 
-  public async findOne(id: number): Promise<DoctorModel> {
+  public async findById(id: number): Promise<DoctorModel> {
     const doctor = await this.model.findOneBy({ id });
     return doctor;
   }
 
   public async findOneByParam(data: any): Promise<DoctorModel> {
-    let doctor: DoctorModel;
-    if (Number(data)) {
-      doctor = await this.model.findOne({
-        where: [
-          { id: Number(data) },
-          { crm: data },
-          { landline_number: data },
-          { mobile_number: data },
-        ],
-      });
-    } else
-      doctor = await this.model.findOne({
-        where: [{ name: data }],
-      });
+    const doctor = await this.model.findOne({
+      where: [
+        { name: data },
+        { crm: data },
+        { landline_number: data },
+        { mobile_number: data },
+      ],
+    });
     return doctor;
   }
 

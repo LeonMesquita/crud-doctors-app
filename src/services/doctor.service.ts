@@ -24,7 +24,7 @@ export class DoctorService {
   }
 
   public async readOne(id: number): Promise<DoctorModel> {
-    const doctor = await this.doctorRepository.findOne(id);
+    const doctor = await this.doctorRepository.findById(id);
     if (!doctor)
       throw new NotFoundException(`The doctor with id ${id} was not found`);
     return doctor;
@@ -49,7 +49,7 @@ export class DoctorService {
     id: number,
     body: DoctorBodySchema,
   ): Promise<DoctorSchema> {
-    const doctor = await this.doctorRepository.findOne(id);
+    const doctor = await this.doctorRepository.findById(id);
     if (!doctor)
       throw new NotFoundException(`The doctor with id ${id} was not found`);
     const doctorSchema = await this.setDoctorAddress(body);
@@ -58,7 +58,7 @@ export class DoctorService {
   }
 
   public async delete(id: number): Promise<string> {
-    const doctor = await this.doctorRepository.findOne(id);
+    const doctor = await this.doctorRepository.findById(id);
     if (!doctor)
       throw new NotFoundException(`The doctor with id ${id} was not found`);
     await this.doctorRepository.softDelete(id);
