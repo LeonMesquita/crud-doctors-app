@@ -9,8 +9,8 @@ describe('DoctorController (e2e)', () => {
   const doctor = {
     name: 'lorem ipsum',
     crm: '4536784',
-    landline_number: '4536345',
-    mobile_number: '43546324',
+    landline_number: '78654356',
+    mobile_number: '86994214856',
     specialties: [1, 2],
     cep: '64207065',
   };
@@ -28,15 +28,6 @@ describe('DoctorController (e2e)', () => {
     await app.close();
   });
 
-  // it('should throw 400 if the name has more than 120 characters', async () => {
-  //   return request(app.getHttpServer())
-  //     .post('${apiUrl}')
-  //     .send({
-  //       ...doctor
-  //     })
-  //     .expect(400);
-  // });
-
   it('should create a new doctor', async () => {
     return request(app.getHttpServer())
       .post(`${apiUrl}`)
@@ -48,20 +39,32 @@ describe('DoctorController (e2e)', () => {
   });
 
   it('should get a doctor by id', async () => {
-    return request(app.getHttpServer()).get(`${apiUrl}/1`).expect(200);
+    return request(app.getHttpServer()).get(`${apiUrl}/id/1`).expect(200);
+  });
+
+  it('should get a doctor by name', async () => {
+    return request(app.getHttpServer())
+      .get(`${apiUrl}/data/${doctor.name}`)
+      .expect(200);
   });
   it('should get a doctor by crm', async () => {
-    return request(app.getHttpServer()).get(`${apiUrl}/4536784`).expect(200);
+    return request(app.getHttpServer())
+      .get(`${apiUrl}/data/${doctor.crm}`)
+      .expect(200);
   });
   it('should get a doctor by landline number', async () => {
-    return request(app.getHttpServer()).get(`${apiUrl}/4536345`).expect(200);
+    return request(app.getHttpServer())
+      .get(`${apiUrl}/data/${doctor.landline_number}`)
+      .expect(200);
   });
   it('should get a doctor by mobile number', async () => {
-    return request(app.getHttpServer()).get(`${apiUrl}/43546324`).expect(200);
+    return request(app.getHttpServer())
+      .get(`${apiUrl}/data/${doctor.mobile_number}`)
+      .expect(200);
   });
   it('should get a list of doctors by cep', async () => {
     return request(app.getHttpServer())
-      .get(`${apiUrl}/address/64207065`)
+      .get(`${apiUrl}/address/${doctor.cep}`)
       .expect(200);
   });
   it('should get a list of doctors by street', async () => {
@@ -112,7 +115,7 @@ describe('DoctorController (e2e)', () => {
       .put(`${apiUrl}/1`)
       .send({
         ...doctor,
-        landline_number: '7865435674',
+        landline_number: '78654356',
       })
       .expect(200);
   });

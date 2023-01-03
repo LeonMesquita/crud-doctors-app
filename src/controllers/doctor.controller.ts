@@ -47,11 +47,27 @@ export class DoctorController {
   public async readAll(): Promise<DoctorModel[]> {
     return await this.doctorService.readAll();
   }
+  @Get('/id/:id')
+  @ApiOperation({
+    summary: 'Retornar um médico pelo id',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Médico retornado com sucesso',
+    type: DoctorModel,
+  })
+  @ApiResponse({ status: 404, description: 'Médico não encontrado' })
+  public async readById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<DoctorModel> {
+    const doctor = await this.doctorService.readOne(id);
+    return doctor;
+  }
 
-  @Get(':data')
+  @Get('/data/:data')
   @ApiOperation({
     summary:
-      'Retornar um médico por um de seus campos únicos (id, nome, CRM ou telefones)',
+      'Retornar um médico por um de seus campos únicos (nome, CRM ou telefones)',
   })
   @ApiResponse({
     status: 200,
