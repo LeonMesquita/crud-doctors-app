@@ -8,7 +8,7 @@ services:
     volumes:
       - crud_doctors_db:/var/lib/postgresql/data
     env_file:
-      - .env
+      - .env.docker
 
 
   crud_doctors_app:
@@ -19,7 +19,7 @@ services:
     depends_on:
       - crud_doctors_db
     env_file:
-      - .env
+      - .env.docker
 
 
 volumes:

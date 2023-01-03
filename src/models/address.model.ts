@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   Column,
   Entity,
@@ -12,24 +13,31 @@ import { DoctorModel } from './doctor.model';
 @Entity('addresses')
 export class AddressModel {
   @PrimaryGeneratedColumn()
+  @ApiProperty()
   id: number;
 
   @Column({ unique: true })
+  @ApiProperty()
   cep: string;
 
   @Column()
+  @ApiProperty()
   street: string;
 
   @Column()
+  @ApiProperty()
   complement: string;
 
   @Column()
+  @ApiProperty()
   district: string;
 
   @Column()
+  @ApiProperty()
   city: string;
 
   @Column()
+  @ApiProperty()
   state: string;
 
   @CreateDateColumn()

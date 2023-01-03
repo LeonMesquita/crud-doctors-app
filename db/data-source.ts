@@ -8,8 +8,13 @@ config();
 
 export const dataSourceOptions: DataSourceOptions & SeederOptions = {
   type: 'postgres',
-  url: process.env.DATABASE_URL,
+  // url: process.env.DATABASE_URL,
+  port: Number(process.env.DB_PORT),
+  username: process.env.DB_USER,
+  host: process.env.DB_HOST,
   synchronize: false,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   entities: [DoctorModel, SpecialtyModel, AddressModel], //[__dirname + '/../**/*.model.js'], //['dist/**/*.model.js'],
   migrations: ['dist/db/migrations/*.js'],
   seeds: [MainSeeder],
