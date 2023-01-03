@@ -1,12 +1,4 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
 
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
@@ -17,13 +9,11 @@ API desenvolvida em [Nest](https://github.com/nestjs/nest) para criação, leitu
 
 ## Rodando a aplicação no Docker
 ```bash
-# criar um arquivo .env.docker na raiz e definir as variáveis de ambiente da imagem postgres conforme consta no arquivo .env.example. Exemplo:
-DB_PORT=5432
-DB_HOST=crud_doctors_db
-DB_USER=postgres
-DB_PASSWORD=postgres
-DB_NAME=crud_doctors
-DB_CONNECTION=postgresql
+# criar um arquivo .env.docker na raiz e definir as variáveis de ambiente necessárias para a imagem do Postgres. Exemplo:
+DATABASE_URL=postgresql://postgres:postgres@crud_doctors_db:5432/crud_doctors
+POSTGRES_USER=postgres 
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=crud_doctors
 
 # Executar o comando
 $ docker-compose up --build
@@ -32,28 +22,28 @@ $ docker-compose up --build
 
 ## Rodando os testes no Docker
 ```bash
-# criar um arquivo .env.test e inserir as variáveis de ambiente da imagem do banco de testes. Exemplo:
-DB_PORT=5432
-DB_HOST=crud_doctors_db_tests
-DB_USER=postgres
-DB_PASSWORD=postgres
-DB_NAME=crud_doctors_tests
-DB_CONNECTION=postgresql
+# criar um arquivo .env.test e definir as variáveis de ambiente da imagem do banco de testes. Exemplo:
+DATABASE_URL=postgresql://postgres:postgres@crud_doctors_db_test:5432/crud_doctors_test
+POSTGRES_USER=postgres 
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=crud_doctors_test
 
 # Executando testes E2E
 $ docker-compose -f docker-compose-tests.yml run crud_doctors_app npm run test:e2e
 ```
 
 
-## Instalação
 
+
+
+
+## Rodando a aplicação na máquina local
 ```bash
+# Criar um arquivo .env na raiz e inserir as variáveis de ambiente conforme consta no arquivo .env.example
+
+# install
 $ npm install
-```
 
-## Rodando a aplicação
-
-```bash
 # development
 $ npm run start
 
@@ -64,7 +54,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Rodando os testes na máquina local
 
 ```bash
 # unit tests
