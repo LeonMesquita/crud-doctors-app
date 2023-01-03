@@ -13,12 +13,6 @@ jobs:
           envkey_POSTGRES_USER: "postgres"
           envkey_POSTGRES_PASSWORD: "postgres"
           envkey_POSTGRES_DB: "crud_doctors"
-          envkey_DB_USER: "postgres"
-          envkey_DB_PASSWORD: "postgres"
-          envkey_DB_NAME: "crud_doctors"
-          envkey_DB_HOST: "crud_doctors_db"
-          envkey_DB_PORT: "5432"
-          envkey_DB_CONNECTION: "postgresql"
           file_name: ".env.docker"
       - name: Run E2E tests
         run: docker-compose run crud_doctors_app npm run test:e2e
