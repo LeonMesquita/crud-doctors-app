@@ -35,6 +35,14 @@ describe('DoctorController (e2e)', () => {
       .send(doctor)
       .expect(201);
   });
+
+  it('should throw conflict error if doctor already exists', async () => {
+    return request(app.getHttpServer())
+      .post(`${apiUrl}`)
+      .send(doctor)
+      .expect(409);
+  });
+
   it('should get a list of all doctors', () => {
     return request(app.getHttpServer()).get(`${apiUrl}`).expect(200);
   });
