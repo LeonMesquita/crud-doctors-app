@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import dataSource from 'db/data-source';
 import { AddressModel } from '../../src/models/address.model';
-import { DoctorModel } from '../../src/models/doctor.model';
+import { DoctorModel, SpecialtyModel } from '../../src/models/doctor.model';
 import {
   DoctorBodySchema,
   DoctorSchema,
@@ -12,25 +12,28 @@ import { Like, Repository } from 'typeorm';
 @Injectable()
 export class DoctorRepository {
   constructor(
-    @InjectRepository(DoctorModel) private model: Repository<DoctorModel>,
+    @InjectRepository(DoctorModel)
+    private doctorRepository: Repository<DoctorModel>,
+    @InjectRepository(SpecialtyModel)
+    private specialtyRepository: Repository<SpecialtyModel>,
   ) {}
   public async insert(body: DoctorSchema): Promise<DoctorModel> {
-    const createdDoctor = await this.model.save(body);
+    const createdDoctor = await this.doctorRepository.save(body);
     return createdDoctor;
   }
 
   public async findAll(): Promise<DoctorModel[]> {
-    const doctors = await this.model.find();
+    const doctors = await this.doctorRepository.find();
     return doctors;
   }
 
   public async findById(id: number): Promise<DoctorModel> {
-    const doctor = await this.model.findOneBy({ id });
+    const doctor = await this.doctorRepository.findOneBy({ id });
     return doctor;
   }
 
   public async findOneByParam(data: any): Promise<DoctorModel> {
-    const doctor = await this.model.findOne({
+    const doctor = await this.doctorRepository.findOne({
       where: [
         { name: data },
         { crm: data },
@@ -42,7 +45,7 @@ export class DoctorRepository {
   }
 
   public async findManyByAddress(data: any): Promise<object[]> {
-    const doctors = await this.model
+    const doctors = await this.doctorRepository
       .createQueryBuilder('doctors')
       .select([
         'doctors.id',
@@ -66,12 +69,16 @@ export class DoctorRepository {
   }
 
   public async update(id: number, body: DoctorSchema): Promise<DoctorSchema> {
-    const instance = await this.model.findOneBy({ id });
+    const instance = await this.doctorRepository.findOneBy({ id });
     Object.assign(instance, body);
-    return await this.model.save(instance);
+    return await this.doctorRepository.save(instance);
   }
 
   public async softDelete(id: number): Promise<void> {
-    await this.model.softDelete(id);
+    await this.doctorRepository.softDelete(id);
+  }
+
+  public async getSpecialtyById(id: number): Promise<SpecialtyModel> {
+    return await this.specialtyRepository.findOneBy({ id });
   }
 }

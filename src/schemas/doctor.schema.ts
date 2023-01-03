@@ -111,7 +111,7 @@ export class DoctorSchema {
   address: Address;
 }
 
-class Specialty {
+export class Specialty {
   @IsInt()
   id: number;
 }

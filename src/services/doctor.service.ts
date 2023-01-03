@@ -3,6 +3,7 @@ import { DoctorModel } from '../../src/models/doctor.model';
 import {
   DoctorBodySchema,
   DoctorSchema,
+  Specialty,
 } from '../../src/schemas/doctor.schema';
 import { DoctorRepository } from '../../src/repositories/doctor.repository';
 import { searchCEP } from '../../src/requisitions/search-cep';
@@ -18,6 +19,7 @@ export class DoctorService {
 
   public async create(body: DoctorBodySchema): Promise<DoctorModel> {
     const doctorSchema = await this.setDoctorAddress(body);
+    await this.checkSpecialties(body.specialties);
 
     const createdDoctor = await this.doctorRepository.insert(doctorSchema);
     return createdDoctor;
@@ -81,5 +83,15 @@ export class DoctorService {
         id: address.id,
       },
     };
+  }
+
+  public async checkSpecialties(specialties: Specialty[]): Promise<void> {
+    for (const item of specialties) {
+      const specialty = await this.doctorRepository.getSpecialtyById(item.id);
+      if (!specialty)
+        throw new NotFoundException(
+          `The specialty with id ${item.id} was not found`,
+        );
+    }
   }
 }
