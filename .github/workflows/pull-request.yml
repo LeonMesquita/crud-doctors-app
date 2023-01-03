@@ -14,6 +14,7 @@ jobs:
           envkey_DB_NAME: "crud_doctors_test"
           envkey_DB_HOST: "crud_doctors_db_test"
           envkey_DB_PORT: "5432"
+          envkey_DB_CONNECTION: "postgresql"
           file_name: ".env.test"
       - name: Run E2E tests
         run: docker-compose -f docker-compose-tests.yml run crud_doctors_app npm run test:e2e
