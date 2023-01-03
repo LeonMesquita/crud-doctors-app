@@ -13,7 +13,7 @@ services:
     container_name: crud_doctors_app
     build: .
     ports:
-      - 5000:5000
+      - 80:5000
     depends_on:
       - crud_doctors_db_test
     env_file:
