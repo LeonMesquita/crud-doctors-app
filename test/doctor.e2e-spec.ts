@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
+import { DoctorModel } from 'src/models/doctor.model';
 
 describe('DoctorController (e2e)', () => {
   const apiUrl = '/doctors';

@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { DoctorModel } from '../../src/models/doctor.model';
 import {
   DoctorBodySchema,
@@ -20,6 +24,7 @@ export class DoctorService {
   public async create(body: DoctorBodySchema): Promise<DoctorModel> {
     const doctorSchema = await this.setDoctorAddress(body);
     await this.checkSpecialties(body.specialties);
+    await this.checkDoctorExists(body);
 
     const createdDoctor = await this.doctorRepository.insert(doctorSchema);
     return createdDoctor;
@@ -93,5 +98,27 @@ export class DoctorService {
           `The specialty with id ${item.id} was not found`,
         );
     }
+  }
+
+  public async checkDoctorExists(body: DoctorBodySchema): Promise<void> {
+    let doctor: DoctorModel;
+    doctor = await this.doctorRepository.findOneByParam(body.name);
+    doctor = await this.doctorRepository.findOneByParam(body.crm);
+    doctor = await this.doctorRepository.findOneByParam(body.landline_number);
+    doctor = await this.doctorRepository.findOneByParam(body.mobile_number);
+
+    if (!doctor) return;
+    else if (doctor.name === body.name)
+      throw new ConflictException('There is already a doctor with this name');
+    else if (doctor.crm === body.crm)
+      throw new ConflictException('There is already a doctor with this crm');
+    else if (doctor.landline_number === body.landline_number)
+      throw new ConflictException(
+        'There is already a doctor with this landline number',
+      );
+    else if (doctor.mobile_number === body.mobile_number)
+      throw new ConflictException(
+        'There is already a doctor with this mobile number',
+      );
   }
 }

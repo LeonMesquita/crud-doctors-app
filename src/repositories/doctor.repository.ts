@@ -81,4 +81,9 @@ export class DoctorRepository {
   public async getSpecialtyById(id: number): Promise<SpecialtyModel> {
     return await this.specialtyRepository.findOneBy({ id });
   }
+  public async reset(): Promise<void> {
+    await this.doctorRepository.query(
+      'TRUNCATE TABLE doctors RESTART IDENTITY CASCADE',
+    );
+  }
 }

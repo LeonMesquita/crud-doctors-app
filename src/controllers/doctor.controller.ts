@@ -30,6 +30,10 @@ export class DoctorController {
     type: DoctorModel,
   })
   @ApiResponse({ status: 400, description: 'Parâmetros inválidos' })
+  @ApiResponse({
+    status: 409,
+    description: 'Atributo(s) único(s) já existente(s)',
+  })
   @ApiResponse({ status: 404, description: 'CEP não encontrado' })
   public async create(@Body() body: DoctorBodySchema): Promise<DoctorModel> {
     const createdDoctor = await this.doctorService.create(body);
