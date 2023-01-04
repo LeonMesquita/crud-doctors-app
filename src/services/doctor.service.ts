@@ -71,7 +71,7 @@ export class DoctorService {
     if (!doctor)
       throw new NotFoundException(`The doctor with id ${id} was not found`);
     await this.doctorRepository.softDelete(id);
-    return '';
+    return 'Doctor deleted';
   }
 
   public async setDoctorAddress(
