@@ -16,3 +16,5 @@ jobs:
           file_name: ".env.test"
       - name: Run E2E tests
         run: docker-compose -f docker-compose-tests.yml run crud_doctors_app npm run test:e2e
+      - name: Run Doctor Controller Unit tests
+        run: docker-compose -f docker-compose-tests.yml run crud_doctors_app npm run test

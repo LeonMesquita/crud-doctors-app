@@ -56,6 +56,16 @@ export class DoctorModel {
   @ManyToOne(() => AddressModel, { eager: true, cascade: true })
   @ApiProperty()
   address: AddressModel;
+
+  constructor(doctor?: Partial<DoctorModel>) {
+    this.id = doctor?.id;
+    this.name = doctor?.name;
+    this.crm = doctor?.crm;
+    this.landline_number = doctor?.landline_number;
+    this.mobile_number = doctor?.mobile_number;
+    this.specialties = doctor?.specialties;
+    this.address = doctor?.address;
+  }
 }
 
 @Entity('specialties')

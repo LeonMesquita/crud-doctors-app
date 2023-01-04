@@ -51,4 +51,14 @@ export class AddressModel {
 
   @OneToMany(() => DoctorModel, (doctor) => doctor.address)
   doctors: DoctorModel[];
+
+  constructor(address?: Partial<AddressModel>) {
+    this.id = address?.id;
+    this.cep = address?.cep;
+    this.complement = address?.complement;
+    this.street = address?.street;
+    this.state = address?.state;
+    this.city = address?.city;
+    this.district = address?.district;
+  }
 }
