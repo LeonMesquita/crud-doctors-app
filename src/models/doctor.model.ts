@@ -11,6 +11,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { AddressModel } from './address.model';
+import { SpecialtyModel } from './specialty.model';
 
 @Entity('doctors')
 export class DoctorModel {
@@ -68,26 +69,26 @@ export class DoctorModel {
   }
 }
 
-@Entity('specialties')
-export class SpecialtyModel {
-  @PrimaryGeneratedColumn()
-  @ApiProperty()
-  id: number;
+// @Entity('specialties')
+// export class SpecialtyModel {
+//   @PrimaryGeneratedColumn()
+//   @ApiProperty()
+//   id: number;
 
-  @Column({ length: 120, unique: true })
-  @ApiProperty()
-  name: string;
+//   @Column({ length: 120, unique: true })
+//   @ApiProperty()
+//   name: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
+//   @CreateDateColumn()
+//   createdAt: Date;
 
-  @UpdateDateColumn()
-  updatedAt: Date;
+//   @UpdateDateColumn()
+//   updatedAt: Date;
 
-  @DeleteDateColumn()
-  deletedAt: Date;
+//   @DeleteDateColumn()
+//   deletedAt: Date;
 
-  @ManyToMany(() => DoctorModel)
-  @JoinTable()
-  doctors: DoctorModel[];
-}
+//   @ManyToMany(() => DoctorModel)
+//   @JoinTable()
+//   doctors: DoctorModel[];
+// }

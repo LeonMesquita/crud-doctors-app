@@ -2,7 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import dataSource from 'db/data-source';
 import { AddressModel } from '../../src/models/address.model';
-import { DoctorModel, SpecialtyModel } from '../../src/models/doctor.model';
+import { DoctorModel } from '../../src/models/doctor.model';
+import { SpecialtyModel } from '../../src/models/specialty.model';
+
 import {
   DoctorBodySchema,
   DoctorSchema,
@@ -80,10 +82,5 @@ export class DoctorRepository {
 
   public async getSpecialtyById(id: number): Promise<SpecialtyModel> {
     return await this.specialtyRepository.findOneBy({ id });
-  }
-  public async reset(): Promise<void> {
-    await this.doctorRepository.query(
-      'TRUNCATE TABLE doctors RESTART IDENTITY CASCADE',
-    );
   }
 }
