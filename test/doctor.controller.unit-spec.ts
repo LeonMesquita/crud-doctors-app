@@ -75,6 +75,7 @@ describe('DoctorController', () => {
   });
   it('should be defined', () => {
     expect(doctorController).toBeDefined();
+
     expect(doctorService).toBeDefined();
   });
 
