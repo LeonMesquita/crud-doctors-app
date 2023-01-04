@@ -20,7 +20,7 @@ jobs:
           envkey_POSTGRES_DB: "crud_doctors"
           file_name: ".env.docker"
       - name: Build
-        run: sudo docker-compose build
+        run: docker-compose build
       
       - name: Run
-        run: sudo docker-compose down && docker-compose up -d
+        run: docker-compose down && docker-compose up -d
