@@ -1,3 +1,4 @@
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AddressModel } from 'src/models/address.model';
 import { DoctorModel } from 'src/models/doctor.model';
@@ -82,6 +83,15 @@ describe('DoctorController', () => {
       const response = await doctorController.create(mockedDoctorSchema);
       expect(response).toEqual(mockedDoctor);
     });
+
+    it('should throw bad request exception on create', async () => {
+      jest
+        .spyOn(doctorService, 'create')
+        .mockRejectedValueOnce(new BadRequestException());
+      expect(doctorController.create(mockedDoctorSchema)).rejects.toThrowError(
+        'Bad Request',
+      );
+    });
   });
 
   describe('readAll', () => {
@@ -96,12 +106,28 @@ describe('DoctorController', () => {
       const response = await doctorController.readById(1);
       expect(response).toEqual(mockedDoctor);
     });
+
+    it('should throw 404 exception', async () => {
+      jest
+        .spyOn(doctorService, 'readOne')
+        .mockRejectedValueOnce(new NotFoundException());
+      expect(doctorController.readById(1)).rejects.toThrowError('Not Found');
+    });
   });
 
-  describe('readOne', () => {
+  describe('readOneByParam', () => {
     it('should return a doctor by a unique param', async () => {
       const response = await doctorController.readOne('data');
       expect(response).toEqual(mockedDoctor);
+    });
+
+    it('should throw 404 exception', async () => {
+      jest
+        .spyOn(doctorService, 'readOneByParam')
+        .mockRejectedValueOnce(new NotFoundException());
+      expect(doctorController.readOne('data')).rejects.toThrowError(
+        'Not Found',
+      );
     });
   });
 
@@ -117,12 +143,28 @@ describe('DoctorController', () => {
       const response = await doctorController.update(1, mockedDoctorSchema);
       expect(response).toEqual(mockedDoctor);
     });
+
+    it('should throw 404 exception on update', async () => {
+      jest
+        .spyOn(doctorService, 'update')
+        .mockRejectedValueOnce(new NotFoundException());
+      expect(
+        doctorController.update(1, mockedDoctorSchema),
+      ).rejects.toThrowError('Not Found');
+    });
   });
 
   describe('delete', () => {
     it('should return the updated doctor', async () => {
       const response = await doctorController.delete(1);
       expect(response).toEqual('Doctor deleted');
+    });
+
+    it('should throw 404 exception on delete', async () => {
+      jest
+        .spyOn(doctorService, 'delete')
+        .mockRejectedValueOnce(new NotFoundException());
+      expect(doctorController.delete(1)).rejects.toThrowError('Not Found');
     });
   });
 });
