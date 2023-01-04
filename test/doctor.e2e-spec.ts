@@ -74,32 +74,64 @@ describe('DoctorController (e2e)', () => {
   it('should get a doctor by id', async () => {
     return request(app.getHttpServer()).get(`${apiUrl}/id/1`).expect(200);
   });
+  it('throw 404 if doctor was not found by id', async () => {
+    return request(app.getHttpServer()).get(`${apiUrl}/id/0`).expect(404);
+  });
 
   it('should get a doctor by name', async () => {
     return request(app.getHttpServer())
       .get(`${apiUrl}/data/${doctor.name}`)
       .expect(200);
   });
+
+  it('throw 404 if doctor was not found by name', async () => {
+    return request(app.getHttpServer())
+      .get(`${apiUrl}/data/inexisting_name`)
+      .expect(404);
+  });
+
   it('should get a doctor by crm', async () => {
     return request(app.getHttpServer())
       .get(`${apiUrl}/data/${doctor.crm}`)
       .expect(200);
   });
+
+  it('throw 404 if doctor was not found by crm', async () => {
+    return request(app.getHttpServer())
+      .get(`${apiUrl}/data/0000000`)
+      .expect(404);
+  });
+
   it('should get a doctor by landline number', async () => {
     return request(app.getHttpServer())
       .get(`${apiUrl}/data/${doctor.landline_number}`)
       .expect(200);
   });
+
+  it('throw 404 if doctor was not found by landline number', async () => {
+    return request(app.getHttpServer())
+      .get(`${apiUrl}/data/00000000`)
+      .expect(404);
+  });
+
   it('should get a doctor by mobile number', async () => {
     return request(app.getHttpServer())
       .get(`${apiUrl}/data/${doctor.mobile_number}`)
       .expect(200);
   });
+
+  it('throw 404 if doctor was not found by mobile number', async () => {
+    return request(app.getHttpServer())
+      .get(`${apiUrl}/data/00000000000`)
+      .expect(404);
+  });
+
   it('should get a list of doctors by cep', async () => {
     return request(app.getHttpServer())
       .get(`${apiUrl}/address/${doctor.cep}`)
       .expect(200);
   });
+
   it('should get a list of doctors by street', async () => {
     return request(app.getHttpServer())
       .get(`${apiUrl}/address/Rua dos Araújos`)
@@ -123,6 +155,7 @@ describe('DoctorController (e2e)', () => {
   it('should get a list of doctors by state', async () => {
     return request(app.getHttpServer()).get(`${apiUrl}/address/PI`).expect(200);
   });
+
   it('should update the doctor name', async () => {
     return request(app.getHttpServer())
       .put(`${apiUrl}/1`)
