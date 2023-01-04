@@ -59,6 +59,8 @@ export class DoctorService {
     const doctor = await this.doctorRepository.findById(id);
     if (!doctor)
       throw new NotFoundException(`The doctor with id ${id} was not found`);
+    await this.checkSpecialties(body.specialties);
+    //await this.checkDoctorExists(body);
     const doctorSchema = await this.setDoctorAddress(body);
 
     return await this.doctorRepository.update(id, doctorSchema);
