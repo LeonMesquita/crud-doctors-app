@@ -12,7 +12,14 @@ describe('DoctorController (e2e)', () => {
     crm: '4536784',
     landline_number: '78654356',
     mobile_number: '86994214856',
-    specialties: [1, 2],
+    specialties: [
+      {
+        id: 4,
+      },
+      {
+        id: 6,
+      },
+    ],
     cep: '64207065',
   };
 
@@ -41,6 +48,23 @@ describe('DoctorController (e2e)', () => {
       .post(`${apiUrl}`)
       .send(doctor)
       .expect(409);
+  });
+
+  it('should throw not found if any specialty id does not exist', async () => {
+    return request(app.getHttpServer())
+      .post(`${apiUrl}`)
+      .send({
+        ...doctor,
+        specialties: [
+          {
+            id: 10,
+          },
+          {
+            id: 20,
+          },
+        ],
+      })
+      .expect(404);
   });
 
   it('should get a list of all doctors', () => {
@@ -154,7 +178,14 @@ describe('DoctorController (e2e)', () => {
       .put(`${apiUrl}/1`)
       .send({
         ...doctor,
-        specialties: [3, 6],
+        specialties: [
+          {
+            id: 4,
+          },
+          {
+            id: 6,
+          },
+        ],
       })
       .expect(200);
   });
