@@ -41,6 +41,8 @@ const mockedDoctorSchema: DoctorBodySchema = {
   cep: '00000000',
 };
 
+const doctorsList: Array<DoctorModel> = [mockedDoctor];
+
 describe('DoctorController', () => {
   let doctorController: DoctorController;
   let doctorService: DoctorService;
@@ -53,12 +55,12 @@ describe('DoctorController', () => {
           provide: DoctorService,
           useValue: {
             create: jest.fn().mockResolvedValue(mockedDoctor),
-            readOne: jest.fn(),
-            readOneByParam: jest.fn(),
-            readAll: jest.fn(),
-            readManyByAddress: jest.fn(),
-            update: jest.fn(),
-            delete: jest.fn(),
+            readOne: jest.fn().mockResolvedValue(mockedDoctor),
+            readOneByParam: jest.fn().mockResolvedValue(mockedDoctor),
+            readAll: jest.fn().mockResolvedValue(doctorsList),
+            readManyByAddress: jest.fn().mockResolvedValue(doctorsList),
+            update: jest.fn().mockResolvedValue(mockedDoctor),
+            delete: jest.fn().mockResolvedValue('Doctor deleted'),
             setDoctorAddress: jest.fn(),
             checkSpecialties: jest.fn(),
             checkDoctorExists: jest.fn(),
@@ -79,6 +81,48 @@ describe('DoctorController', () => {
     it('should return the created doctor', async () => {
       const response = await doctorController.create(mockedDoctorSchema);
       expect(response).toEqual(mockedDoctor);
+    });
+  });
+
+  describe('readAll', () => {
+    it('should return a list with all doctors', async () => {
+      const response = await doctorController.readAll();
+      expect(response).toEqual(doctorsList);
+    });
+  });
+
+  describe('readById', () => {
+    it('should return the created doctor', async () => {
+      const response = await doctorController.readById(1);
+      expect(response).toEqual(mockedDoctor);
+    });
+  });
+
+  describe('readOne', () => {
+    it('should return a doctor by a unique param', async () => {
+      const response = await doctorController.readOne('data');
+      expect(response).toEqual(mockedDoctor);
+    });
+  });
+
+  describe('readManyByAddress', () => {
+    it('should return a list with all doctors by the address field', async () => {
+      const response = await doctorController.readManyByAddress('data');
+      expect(response).toEqual(doctorsList);
+    });
+  });
+
+  describe('update', () => {
+    it('should return the updated doctor', async () => {
+      const response = await doctorController.update(1, mockedDoctorSchema);
+      expect(response).toEqual(mockedDoctor);
+    });
+  });
+
+  describe('delete', () => {
+    it('should return the updated doctor', async () => {
+      const response = await doctorController.delete(1);
+      expect(response).toEqual('Doctor deleted');
     });
   });
 });

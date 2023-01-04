@@ -95,7 +95,7 @@ export class DoctorController {
     type: DoctorModel,
     isArray: true,
   })
-  public async readMany(@Param('data') data: any): Promise<object[]> {
+  public async readManyByAddress(@Param('data') data: any): Promise<object[]> {
     const doctor = await this.doctorService.readManyByAddress(data);
     return doctor;
   }
@@ -122,7 +122,7 @@ export class DoctorController {
   @ApiResponse({ status: 200, description: 'Médico deletado com sucesso' })
   @ApiResponse({ status: 404, description: 'Médico não encontrado' })
   public async delete(@Param('id', ParseIntPipe) id: number): Promise<string> {
-    await this.doctorService.delete(id);
-    return '';
+    const response = await this.doctorService.delete(id);
+    return response;
   }
 }
