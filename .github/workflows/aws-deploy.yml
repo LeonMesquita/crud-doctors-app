@@ -19,6 +19,8 @@ jobs:
           envkey_POSTGRES_PASSWORD: "postgres"
           envkey_POSTGRES_DB: "crud_doctors"
           file_name: ".env.docker"
+      - name: Build
+        run: sudo docker-compose build
       
       - name: Run
-        run: docker-compose down && docker-compose up --build -d
+        run: sudo docker-compose down && docker-compose up -d
