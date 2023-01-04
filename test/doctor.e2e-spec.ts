@@ -223,7 +223,21 @@ describe('DoctorController (e2e)', () => {
       .expect(200);
   });
 
+  it('should throw 404 if the doctor was not found on update', async () => {
+    return request(app.getHttpServer())
+      .put(`${apiUrl}/0`)
+      .send({
+        ...doctor,
+        name: 'New Name',
+      })
+      .expect(404);
+  });
+
   it('should delete a doctor', async () => {
     return request(app.getHttpServer()).delete(`${apiUrl}/1`).expect(200);
+  });
+
+  it('should throw 404 if the doctor was not found on delete', async () => {
+    return request(app.getHttpServer()).delete(`${apiUrl}/0`).expect(404);
   });
 });
