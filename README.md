@@ -41,7 +41,7 @@ POSTGRES_PASSWORD=postgres
 POSTGRES_DB=crud_doctors_test
 
 # Executando testes unitários
-$ npm run test
+$ docker-compose -f docker-compose-tests.yml run crud_doctors_app npm run test
 
 # Executando testes E2E
 $ docker-compose -f docker-compose-tests.yml run crud_doctors_app npm run test:e2e
