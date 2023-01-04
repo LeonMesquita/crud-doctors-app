@@ -2,10 +2,10 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { loadEnvVariables } from './loader';
+import { config } from 'dotenv';
+config();
 
 async function bootstrap() {
-  await loadEnvVariables();
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix('/api');

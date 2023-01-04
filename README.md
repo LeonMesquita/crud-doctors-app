@@ -11,7 +11,7 @@ API desenvolvida em [Nest](https://github.com/nestjs/nest) para criação, leitu
 ## Documentação Swagger
 ```bash
 # Via deploy AWS
-http://ec2-18-212-48-80.compute-1.amazonaws.com/docs
+http://ec2-34-239-103-96.compute-1.amazonaws.com/docs
 
 # Via localhost
 http://localhost:${PORT}/docs
