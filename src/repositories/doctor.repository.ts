@@ -47,13 +47,17 @@ export class DoctorRepository {
   }
 
   public async findManyByAddress(data: any): Promise<object[]> {
-    const doctors = await this.doctorRepository.query(`
+    const doctors = await this.doctorRepository.query(
+      `
       SELECT d.*, json_build_object('id', a.id, 'cep', a.cep, 'street', a.street, 'complement', a.complement, 'district',
       a.district, 'city', a.city, 'state', a.state) as address      
       FROM DOCTORS d
       JOIN addresses a
       ON d."addressId" = a.id
-    `);
+      WHERE a.cep = $1 OR a.street = $1 OR a.complement = $1 OR a.district = $1 OR a.city = $1 OR a.state = $1
+    `,
+      [data],
+    );
 
     return doctors;
   }
