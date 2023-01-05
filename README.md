@@ -8,6 +8,15 @@
 
 API desenvolvida em [Nest](https://github.com/nestjs/nest) para criação, leitura, edição e remoção de registros de médicos.
 
+## URL da API
+```bash
+# Via deploy AWS
+http://ec2-34-239-103-96.compute-1.amazonaws.com/api/doctors/
+
+# Via localhost
+http://localhost:${PORT}/api/doctors/
+```
+
 ## Documentação Swagger
 ```bash
 # Via deploy AWS
