@@ -47,25 +47,13 @@ export class DoctorRepository {
   }
 
   public async findManyByAddress(data: any): Promise<object[]> {
-    const doctors = await this.doctorRepository
-      .createQueryBuilder('doctors')
-      .select([
-        'doctors.id',
-        'doctors.name',
-        'doctors.crm',
-        'doctors.landline_number',
-        'doctors.mobile_number',
-        'a.street as street',
-      ])
-      .where('doctors."addressId" = a.id')
-      .andWhere(
-        'a.street = :data or a.cep = :data or a.district = :data or a.city = :data or a.state = :data or a.complement = :data',
-        {
-          data,
-        },
-      )
-      .innerJoinAndSelect(AddressModel, 'a')
-      .getMany();
+    const doctors = await this.doctorRepository.query(`
+      SELECT d.*, json_build_object('id', a.id, 'cep', a.cep, 'street', a.street, 'complement', a.complement, 'district',
+      a.district, 'city', a.city, 'state', a.state) as address      
+      FROM DOCTORS d
+      JOIN addresses a
+      ON d."addressId" = a.id
+    `);
 
     return doctors;
   }
