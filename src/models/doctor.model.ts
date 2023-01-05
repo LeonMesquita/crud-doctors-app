@@ -68,27 +68,3 @@ export class DoctorModel {
     this.address = doctor?.address;
   }
 }
-
-// @Entity('specialties')
-// export class SpecialtyModel {
-//   @PrimaryGeneratedColumn()
-//   @ApiProperty()
-//   id: number;
-
-//   @Column({ length: 120, unique: true })
-//   @ApiProperty()
-//   name: string;
-
-//   @CreateDateColumn()
-//   createdAt: Date;
-
-//   @UpdateDateColumn()
-//   updatedAt: Date;
-
-//   @DeleteDateColumn()
-//   deletedAt: Date;
-
-//   @ManyToMany(() => DoctorModel)
-//   @JoinTable()
-//   doctors: DoctorModel[];
-// }
