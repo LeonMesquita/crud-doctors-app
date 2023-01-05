@@ -76,7 +76,7 @@
 					"variable": [
 						{
 							"key": "data",
-							"value": null
+							"value": ""
 						}
 					]
 				}
@@ -118,7 +118,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Leozzim\",\n    \"crm\": \"345745\",\n    \"landline_number\": \"22222222\",\n    \"mobile_number\": \"111111111\",\n    \"cep\": \"64207065\",\n    \"specialties\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 8\n        }\n    ]\n}",
+					"raw": "{\n    \"name\": \"Roberto Carlos\",\n    \"crm\": \"345745\",\n    \"landline_number\": \"22222222\",\n    \"mobile_number\": \"111111111\",\n    \"cep\": \"64207065\",\n    \"specialties\": [\n        {\n            \"id\": 1\n        },\n        {\n            \"id\": 8\n        }\n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
