@@ -1,0 +1,26 @@
+# name: Deploy on AWS
+# on:
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   build:
+#     name: Deploy to EC2
+#     runs-on: self-hosted
+#     timeout-minutes: 30
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#       - name: Create env file
+#         uses: SpicyPizza/create-envfile@v1.3
+#         with:
+#           envkey_DATABASE_URL: "postgresql://postgres:postgres@crud_doctors_db:5432/crud_doctors"
+#           envkey_POSTGRES_USER: "postgres"
+#           envkey_POSTGRES_PASSWORD: "postgres"
+#           envkey_POSTGRES_DB: "crud_doctors"
+#           file_name: ".env.docker"
+#       - name: Build
+#         run: sudo docker-compose build
+      
+#       - name: Run
+#         run: sudo docker-compose down && docker-compose up -d

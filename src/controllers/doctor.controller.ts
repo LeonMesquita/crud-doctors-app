@@ -50,6 +50,7 @@ export class DoctorController {
   public async readAll(): Promise<DoctorModel[]> {
     return await this.doctorService.readAll();
   }
+
   @Get('/id/:id')
   @ApiOperation({
     summary: 'Retornar um médico pelo id',
