@@ -11,7 +11,7 @@ API desenvolvida em [Nest](https://github.com/nestjs/nest) para criação, leitu
 ## URL da API
 ```bash
 # Via deploy AWS
-http://ec2-35-174-109-83.compute-1.amazonaws.com/api/doctors/
+http://ec2-54-211-137-28.compute-1.amazonaws.com//api/doctors/
 
 # Via localhost
 http://localhost:${PORT}/api/doctors/
@@ -20,7 +20,7 @@ http://localhost:${PORT}/api/doctors/
 ## Documentação Swagger
 ```bash
 # Via deploy AWS
-http://ec2-35-174-109-83.compute-1.amazonaws.com/docs
+http://ec2-54-211-137-28.compute-1.amazonaws.com//docs
 
 # Via localhost
 http://localhost:${PORT}/docs
