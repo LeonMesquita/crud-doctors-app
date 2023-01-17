@@ -35,6 +35,7 @@ DATABASE_URL=postgresql://postgres:postgres@crud_doctors_db:5432/crud_doctors
 POSTGRES_USER=postgres 
 POSTGRES_PASSWORD=postgres
 POSTGRES_DB=crud_doctors
+PORT=5000
 
 # Executar o comando
 $ docker-compose up --build
@@ -48,6 +49,7 @@ DATABASE_URL=postgresql://postgres:postgres@crud_doctors_db_test:5432/crud_docto
 POSTGRES_USER=postgres 
 POSTGRES_PASSWORD=postgres
 POSTGRES_DB=crud_doctors_test
+PORT=5000
 
 # Executando testes unitários
 $ docker-compose -f docker-compose-tests.yml run crud_doctors_app npm run test
